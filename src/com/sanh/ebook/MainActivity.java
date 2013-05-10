@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.sanh.ebook.interfaces.ActivityInterface;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,14 @@ public class MainActivity extends Activity
 			R.drawable.first_7,R.drawable.first_10,R.drawable.first_13,
 			R.drawable.first_16
 	};
+	private int[] showTotalImages = new int[]{
+		R.drawable.first_1, R.drawable.first_2, R.drawable.first_3,
+		R.drawable.first_4, R.drawable.first_5, R.drawable.first_6,
+		R.drawable.first_7, R.drawable.first_8, R.drawable.first_9,
+		R.drawable.first_10, R.drawable.first_11, R.drawable.first_12,
+		R.drawable.first_13, R.drawable.first_14, R.drawable.first_15,
+		R.drawable.first_16, R.drawable.first_17, R.drawable.first_18,  
+	};  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +54,8 @@ public class MainActivity extends Activity
 		for(int i = 0; i < images.length; i++){
 			Map<String,Object> map = new HashMap<String, Object>();
 			map.put("icon", images[i]);
-			data.add(map);
-		}
-		
+			data.add(map);    
+		}   
 	}
 	
 	@Override
@@ -61,13 +70,25 @@ public class MainActivity extends Activity
 												  new String[]{"icon"},
 												  new int[]{R.id.gridview_item_imageview});
 		gridview.setAdapter(adapter);
+		gridview.setOnItemClickListener(this);
 	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		
-		
+			long id) { 
+		Intent intent = new Intent(this,LookBookActivity.class);
+		int[] showPartImages = cteateImages(5);
+		intent.putExtra("images", showPartImages);
+		startActivity(intent);
+	}
+
+	private int[] cteateImages(int num) {
+		int showPartImages[] = new int[num];
+		for(int i = 0;  i < num ; i++){
+			int index = new Random().nextInt(showTotalImages.length);
+			showPartImages[i] =  showTotalImages[index];
+		}    
+		return showPartImages;  
 	}
 	
 	
