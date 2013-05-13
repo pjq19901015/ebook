@@ -2,7 +2,7 @@ package com.sanh.ebook;
 
 import com.sanh.ebook.interfaces.ActivityInterface;
 import com.sanh.ebook.utils.CurlPage;
-import com.sanh.ebook.utils.CurlView;
+import com.sanh.ebook.widget.CurlView;
 
 
 import android.app.Activity;
@@ -66,29 +66,30 @@ public class LookBookActivity extends Activity implements ActivityInterface{
 			int border = 3; 
 			Rect r = new Rect(margin, margin, width - margin, height - margin);  
 			int imageWidth = r.width() - (border * 2);
-			int imageHeight = imageWidth * d.getIntrinsicHeight()
-					/ d.getIntrinsicWidth();
-			if (imageHeight > r.height() - (border * 2)) {
+			/*int imageHeight = imageWidth * d.getIntrinsicHeight()
+					/ d.getIntrinsicWidth();*/
+			int imageHeight = r.height() - (border *2);
+			/*if (imageHeight > r.height() - (border * 2)) {  
 				imageHeight = r.height() - (border * 2);
-				imageWidth = imageHeight * d.getIntrinsicWidth()
-						/ d.getIntrinsicHeight();
-			}
+				imageWidth = imageHeight * d.getIntrinsicWidth()  
+						/ d.getIntrinsicHeight();    
+			} */ 
 
 			r.left += ((r.width() - imageWidth) / 2) - border;
 			r.right = r.left + imageWidth + border + border;
 			r.top += ((r.height() - imageHeight) / 2) - border;
-			r.bottom = r.top + imageHeight + border + border;
+			r.bottom = r.top + imageHeight + border + border; 
 
-			Paint p = new Paint();
+			Paint p = new Paint();  
 			p.setColor(0xFFC0C0C0);  
-			c.drawRect(r, p);
+			c.drawRect(r, p); 
 			r.left += border;
-			r.right -= border;  
-			r.top += border;
-			r.bottom -= border;
-
+			r.right -= border;   
+			r.top += border;  
+			r.bottom -= border;    
+ 
 			d.setBounds(r);
-			d.draw(c);
+			d.draw(c);  
  
 			return b;
 		}
